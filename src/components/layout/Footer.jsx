@@ -45,12 +45,12 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 border-t border-reunir-dark/10 bg-white">
-      <Container className="py-12">
+    <footer className="mt-16 border-t border-white/10 bg-black">
+      <Container className="py-12 text-white">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_3fr]">
           <div className="space-y-4">
-            <img src={logo} alt="Réunir" className="h-12 w-auto" />
-            <p className="text-sm text-reunir-dark/80">
+            <img src={logo} alt="Réunir" className="h-12 w-auto opacity-90" />
+            <p className="text-sm text-white/70">
               Premier réseau coopératif des PME du transport de voyageurs en France. Nous accompagnons les
               transporteurs, les territoires et les partenaires avec exigence et proximité.
             </p>
@@ -59,7 +59,7 @@ const Footer = () => {
                 href="https://www.linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm font-medium text-reunir-dark transition hover:text-reunir-accent"
+                className="text-sm font-medium text-white/80 transition hover:text-white"
               >
                 LinkedIn
               </a>
@@ -84,10 +84,10 @@ const Footer = () => {
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {footerCols.map((column) => (
               <div key={column.title}>
-                <p className="text-sm font-semibold uppercase tracking-wide text-reunir-dark">{column.title}</p>
-                <div className="mt-3 flex flex-col gap-2 text-sm text-reunir-dark/80">
+                <p className="text-sm font-semibold uppercase tracking-wide text-white">{column.title}</p>
+                <div className="mt-3 flex flex-col gap-2 text-sm text-white/70">
                   {column.links.map((link) => (
-                    <Link key={link.to} to={link.to} className="transition hover:text-reunir-accent">
+                    <Link key={link.to} to={link.to} className="transition hover:text-white">
                       {link.label}
                     </Link>
                   ))}
@@ -96,16 +96,16 @@ const Footer = () => {
             ))}
           </div>
         </div>
-        <div className="mt-10 flex flex-col gap-4 border-t border-reunir-dark/10 pt-6 text-xs text-reunir-dark/70 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
           <p>© {currentYear} Réunir. Tous droits réservés.</p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/mentions-legales" className="hover:text-reunir-accent">
+            <Link to="/mentions-legales" className="hover:text-white">
               Mentions légales
             </Link>
-            <Link to="/politique-confidentialite" className="hover:text-reunir-accent">
+            <Link to="/politique-confidentialite" className="hover:text-white">
               Politique de confidentialité
             </Link>
-            <Link to="/cookies" className="hover:text-reunir-accent">
+            <Link to="/cookies" className="hover:text-white">
               Cookies
             </Link>
           </div>

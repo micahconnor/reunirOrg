@@ -31,7 +31,7 @@ const utilityLinks = [
 ];
 
 const navLinkBase =
-  'text-sm font-medium transition-colors duration-150 hover:text-reunir-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-reunir-accent';
+  'text-sm font-medium transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-reunir-accent';
 
 const Header = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -50,7 +50,7 @@ const Header = () => {
       key={link.to}
       to={link.to}
       className={({ isActive }) =>
-        `${navLinkBase} ${isActive ? 'text-reunir-accent' : 'text-reunir-dark'}`
+        `${navLinkBase} ${isActive ? 'text-white' : 'text-white/70 hover:text-white'}`
       }
       onClick={closeMenus}
     >
@@ -59,24 +59,24 @@ const Header = () => {
   );
 
   return (
-    <header className="sticky top-0 z-40 bg-reunir-light/95 backdrop-blur shadow-sm">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/20 bg-gradient-to-r from-white/10 via-white/5 to-white/10 backdrop-blur-3xl shadow-[0_20px_45px_rgba(0,0,0,0.25)]">
       <Container className="flex items-center justify-between py-4">
         <Link to="/" className="flex items-center gap-3" onClick={closeMenus}>
-          <img src={logo} alt="Réunir" className="h-10 w-auto" />
+          <img src={logo} alt="Réunir" className="h-10 w-auto opacity-80 mix-blend-plus-lighter" />
           <span className="sr-only">Réunir</span>
         </Link>
 
         <div className="flex items-center gap-4 lg:hidden">
           <Link
             to="/job-board"
-            className="text-xs font-semibold uppercase tracking-wide text-reunir-dark"
+            className="text-xs font-semibold uppercase tracking-wide text-white/80"
             onClick={closeMenus}
           >
             Job Board
           </Link>
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-md border border-reunir-dark text-reunir-dark"
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-white/30 text-white"
             onClick={toggleMobileMenu}
             aria-label="Ouvrir la navigation"
           >
@@ -94,11 +94,11 @@ const Header = () => {
           </button>
         </div>
 
-        <nav className="hidden lg:flex lg:items-center lg:gap-8">
+        <nav className="hidden lg:flex lg:items-center lg:gap-8 text-white">
           <div className="relative">
             <button
               type="button"
-              className={`${navLinkBase} flex items-center gap-1 text-reunir-dark`}
+              className={`${navLinkBase} flex items-center gap-1 text-white/80 hover:text-white`}
               onClick={toggleDropdown}
             >
               Nos Services
@@ -113,7 +113,7 @@ const Header = () => {
               </svg>
             </button>
             {openDropdown && (
-              <div className="absolute left-0 mt-3 w-56 rounded-lg border border-reunir-dark/10 bg-white p-4 shadow-lg">
+              <div className="absolute left-0 mt-3 w-56 rounded-lg border border-white/10 bg-[#0c1328] p-4 shadow-lg">
                 <div className="flex flex-col gap-3 text-sm">
                   {serviceLinks.map((link) => renderNavLink(link))}
                 </div>
@@ -121,7 +121,7 @@ const Header = () => {
             )}
           </div>
           {mainNavLinks.map((link) => renderNavLink(link))}
-          <Link to="/job-board" className="text-xs font-semibold uppercase tracking-wide text-reunir-dark" onClick={closeMenus}>
+          <Link to="/job-board" className="text-xs font-semibold uppercase tracking-wide text-white/80 hover:text-white" onClick={closeMenus}>
             Job Board
           </Link>
           <a
@@ -136,12 +136,12 @@ const Header = () => {
       </Container>
 
       {isMobileOpen && (
-        <div className="border-t border-reunir-dark/10 bg-white lg:hidden">
+        <div className="border-t border-white/10 bg-[#050611]/95 lg:hidden backdrop-blur-xl">
           <Container className="flex flex-col gap-4 py-6">
             <div>
               <button
                 type="button"
-                className="flex w-full items-center justify-between rounded-md border border-reunir-dark/20 px-4 py-2 text-left text-sm font-semibold text-reunir-dark"
+                className="flex w-full items-center justify-between rounded-md border border-white/20 px-4 py-2 text-left text-sm font-semibold text-white"
                 onClick={toggleDropdown}
               >
                 <span>Nos Services</span>
@@ -156,21 +156,21 @@ const Header = () => {
                 </svg>
               </button>
               {openDropdown && (
-                <div className="mt-3 flex flex-col gap-3 rounded-lg border border-reunir-dark/10 bg-reunir-light p-4">
+                <div className="mt-3 flex flex-col gap-3 rounded-lg border border-white/10 bg-white/10 p-4 text-white">
                   {serviceLinks.map((link) => renderNavLink(link))}
                 </div>
               )}
             </div>
-            <div className="flex flex-col gap-3">{mainNavLinks.map((link) => renderNavLink(link))}</div>
-            <div className="grid gap-2 rounded-lg bg-reunir-light/60 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-reunir-dark">Explorer</p>
+            <div className="flex flex-col gap-3 text-white">{mainNavLinks.map((link) => renderNavLink(link))}</div>
+            <div className="grid gap-2 rounded-lg bg-white/5 p-4 text-white">
+              <p className="text-xs font-semibold uppercase tracking-wide text-white">Explorer</p>
               {utilityLinks.map((link) => renderNavLink(link))}
             </div>
             <a
               href="https://espace-adherent.reunir.fr"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-reunir-dark px-5 py-2 text-center text-sm font-semibold text-white transition hover:bg-reunir-accent"
+              className="rounded-full bg-white/10 px-5 py-2 text-center text-sm font-semibold text-white transition hover:bg-white/20"
             >
               Espace Adhérent
             </a>

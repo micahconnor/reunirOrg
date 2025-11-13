@@ -1,27 +1,29 @@
-import Hero from '../components/homepage/Hero.jsx';
-import StatsBar from '../components/homepage/StatsBar.jsx';
-import DecouvrirReunir from '../components/homepage/DecouvrirReunir.jsx';
-import Promotion2027 from '../components/homepage/Promotion2027.jsx';
-import PourquoiPromotion from '../components/homepage/PourquoiPromotion.jsx';
-import PartenairesConfiance from '../components/homepage/PartenairesConfiance.jsx';
-import BookPartenaires from '../components/homepage/BookPartenaires.jsx';
-import PretALancer from '../components/homepage/PretALancer.jsx';
-import NosEngagements from '../components/homepage/NosEngagements.jsx';
-import FinalBanner from '../components/homepage/FinalBanner.jsx';
+import HeroSection from '../components/home/HeroSection.jsx';
+import EcosystemSection from '../components/home/EcosystemSection.jsx';
+import DiscoverSection from '../components/home/DiscoverSection.jsx';
+import PromotionSection from '../components/home/PromotionSection.jsx';
+import WhyJoinSection from '../components/home/WhyJoinSection.jsx';
+import PartnersSection from '../components/home/PartnersSection.jsx';
+import BookSection from '../components/home/BookSection.jsx';
+import EngagementsSection from '../components/home/EngagementsSection.jsx';
+import LatestNewsSection from '../components/home/LatestNewsSection.jsx';
+import PartnershipsSection from '../components/home/PartnershipsSection.jsx';
+import ServicesBanner from '../components/home/ServicesBanner.jsx';
 
 const HomePage = () => {
   return (
     <>
-      <Hero />
-      <StatsBar />
-      <DecouvrirReunir />
-      <Promotion2027 />
-      <PourquoiPromotion />
-      <PartenairesConfiance />
-      <BookPartenaires />
-      <PretALancer />
-      <NosEngagements />
-      <FinalBanner />
+      <HeroSection />
+      <EcosystemSection />
+      <DiscoverSection />
+      <PromotionSection />
+      <WhyJoinSection />
+      <PartnersSection />
+      <BookSection />
+      <EngagementsSection />
+      <LatestNewsSection />
+      <PartnershipsSection />
+      <ServicesBanner />
     </>
   );
 };
