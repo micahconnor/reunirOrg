@@ -1,5 +1,6 @@
 import Container from '../layout/Container.jsx';
 import { discoverContent } from '../../data/homepageContent.js';
+import Button from '../common/Button.jsx';
 
 const DiscoverSection = () => {
   return (
@@ -26,12 +27,9 @@ const DiscoverSection = () => {
               </li>
             ))}
           </ul>
-          <a
-            href={discoverContent.cta.to}
-            className="inline-flex rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-          >
+          <Button href={discoverContent.cta.to}>
             {discoverContent.cta.label}
-          </a>
+          </Button>
         </div>
       </Container>
     </section>

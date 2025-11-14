@@ -1,5 +1,6 @@
 import Container from '../layout/Container.jsx';
 import { servicesBannerContent } from '../../data/homepageContent.js';
+import Button from '../common/Button.jsx';
 
 const ServicesBanner = () => {
   return (
@@ -15,9 +16,9 @@ const ServicesBanner = () => {
       <Container className="relative flex flex-col items-center gap-4 py-20 text-center text-white">
         <h2 className="text-4xl font-semibold">{servicesBannerContent.title}</h2>
         <p className="max-w-3xl text-lg text-white/80">{servicesBannerContent.description}</p>
-        <a href={servicesBannerContent.cta.to} className="rounded-full border border-white px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+        <Button href={servicesBannerContent.cta.to}>
           {servicesBannerContent.cta.label}
-        </a>
+        </Button>
       </Container>
     </section>
   );

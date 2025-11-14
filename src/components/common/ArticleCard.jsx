@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Button from './Button.jsx';
 
 const ArticleCard = ({ article }) => {
   if (!article) return null;
@@ -14,9 +14,9 @@ const ArticleCard = ({ article }) => {
         <p className="text-xs uppercase tracking-[0.3em] text-white/60">{formattedDate}</p>
         <h3 className="text-lg font-semibold">{title}</h3>
         <p className="text-sm text-white/70">{excerpt}</p>
-        <Link to={to} className="mt-auto text-sm font-semibold text-white hover:text-[#A76F6F]">
-          Lire l’article →
-        </Link>
+        <Button to={to} className="mt-auto">
+          Lire l'article →
+        </Button>
       </div>
     </article>
   );

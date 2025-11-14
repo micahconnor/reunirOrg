@@ -1,5 +1,6 @@
 import Container from '../layout/Container.jsx';
 import { bookContent } from '../../data/homepageContent.js';
+import Button from '../common/Button.jsx';
 
 const BookSection = () => {
   return (
@@ -18,9 +19,9 @@ const BookSection = () => {
               </div>
             ))}
           </div>
-          <a href={bookContent.cta.to} className="inline-flex rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+          <Button href={bookContent.cta.to}>
             {bookContent.cta.label}
-          </a>
+          </Button>
         </div>
         <div className="lg:w-1/2">
           <img src={bookContent.image} alt="Book partenaires" className="rounded-[32px] border border-white/10 object-cover shadow-[0_20px_60px_rgba(0,0,0,0.45)]" />

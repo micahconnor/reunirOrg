@@ -1,5 +1,6 @@
 import Container from '../layout/Container.jsx';
 import { whyJoinContent } from '../../data/homepageContent.js';
+import Button from '../common/Button.jsx';
 
 const WhyJoinSection = () => {
   return (
@@ -9,9 +10,9 @@ const WhyJoinSection = () => {
           <p className="text-sm uppercase tracking-[0.3em] text-white/60">{whyJoinContent.kicker}</p>
           <h2 className="text-4xl font-semibold">{whyJoinContent.title}</h2>
           <p className="text-lg text-white/75">{whyJoinContent.description}</p>
-          <a href={whyJoinContent.cta.to} className="inline-flex rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+          <Button href={whyJoinContent.cta.to}>
             {whyJoinContent.cta.label}
-          </a>
+          </Button>
         </div>
         <div className="grid gap-4">
           {whyJoinContent.cards.map((card, index) => (

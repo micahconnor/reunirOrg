@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo/reunir-logo.svg';
 import Container from './Container.jsx';
+import Button from '../common/Button.jsx';
 
 const mainNavLinks = [
   { label: 'Le Groupe', to: '/le-groupe' },
@@ -124,14 +125,13 @@ const Header = () => {
           <Link to="/job-board" className="text-xs font-semibold uppercase tracking-wide text-white/80 hover:text-white" onClick={closeMenus}>
             Job Board
           </Link>
-          <a
+          <Button
             href="https://espace-adherent.reunir.fr"
             target="_blank"
             rel="noreferrer"
-            className="rounded-full bg-reunir-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-reunir-accent"
           >
             Espace Adhérent
-          </a>
+          </Button>
         </nav>
       </Container>
 
@@ -166,14 +166,13 @@ const Header = () => {
               <p className="text-xs font-semibold uppercase tracking-wide text-white">Explorer</p>
               {utilityLinks.map((link) => renderNavLink(link))}
             </div>
-            <a
+            <Button
               href="https://espace-adherent.reunir.fr"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-white/10 px-5 py-2 text-center text-sm font-semibold text-white transition hover:bg-white/20"
             >
               Espace Adhérent
-            </a>
+            </Button>
           </Container>
         </div>
       )}
