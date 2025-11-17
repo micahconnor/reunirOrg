@@ -1,18 +1,16 @@
+import PageHero from '../components/common/PageHero.jsx';
 import Container from '../components/layout/Container.jsx';
 
 const ReunirAvantagesPage = () => {
   return (
-    <section className="py-16">
-      <Container>
-        <div className="rounded-3xl border border-reunir-dark/10 bg-white p-10 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-wide text-reunir-dark/70">Réunir Avantages</p>
-          <h1 className="text-3xl font-semibold text-reunir-dark">Offres exclusives du réseau</h1>
-          <p className="mt-4 text-lg text-reunir-dark/80">
-            Placeholder. Nous y mettrons les partenariats et réductions accessibles aux adhérents.
-          </p>
-        </div>
+    <div className="bg-black text-white">
+      <PageHero kicker="Réunir Avantages" title="Offres exclusives du réseau" description="Présentation à venir." />
+      <Container className="space-y-10 py-20">
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center text-white/70">
+          <p>Programmes d’avantages en cours d’intégration.</p>
+        </section>
       </Container>
-    </section>
+    </div>
   );
 };
 

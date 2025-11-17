@@ -1,20 +1,20 @@
+import PageHero from '../components/common/PageHero.jsx';
 import Container from '../components/layout/Container.jsx';
 
 const MarqueEmployeurPage = () => {
   return (
-    <section className="py-16">
-      <Container>
-        <div className="rounded-3xl border border-reunir-dark/10 bg-white p-10 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-wide text-reunir-dark/70">
-            Présentation de la marque employeur
-          </p>
-          <h1 className="text-3xl font-semibold text-reunir-dark">L’expérience collaborateurs</h1>
-          <p className="mt-4 text-lg text-reunir-dark/80">
-            Placeholder. Nous intégrerons vidéos, chiffres clés et témoignages issus de votre Figma pour cette page.
-          </p>
-        </div>
+    <div className="bg-black text-white">
+      <PageHero
+        kicker="Marque employeur"
+        title="Des PME qui recrutent et fidélisent"
+        description="Les témoignages, vidéos internes et parcours RH seront publiés ici."
+      />
+      <Container className="space-y-10 py-20">
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center text-white/70">
+          <p>Contenus en cours de production : interviews dirigeants, portraits collaborateurs, engagements QVCT.</p>
+        </section>
       </Container>
-    </section>
+    </div>
   );
 };
 

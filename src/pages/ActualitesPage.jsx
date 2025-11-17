@@ -1,18 +1,26 @@
+import PageHero from '../components/common/PageHero.jsx';
 import Container from '../components/layout/Container.jsx';
+import ArticleCard from '../components/common/ArticleCard.jsx';
+import { articles } from '../data/homepageContent.js';
 
 const ActualitesPage = () => {
+  const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
+
   return (
-    <section className="py-16">
-      <Container>
-        <div className="rounded-3xl border border-reunir-dark/10 bg-white p-10 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-wide text-reunir-dark/70">Actualités</p>
-          <h1 className="text-3xl font-semibold text-reunir-dark">Les news du réseau</h1>
-          <p className="mt-4 text-lg text-reunir-dark/80">
-            Placeholder. Cette page accueillera le flux d’articles, communiqués et mises à jour.
-          </p>
+    <div className="bg-black text-white">
+      <PageHero
+        kicker="Magazine"
+        title="Les actualités du réseau Réunir"
+        description="Retrouvez les temps forts, retours d’expériences et initiatives portés par nos adhérents et partenaires."
+      />
+      <Container className="space-y-8 py-20">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {sorted.map((article) => (
+            <ArticleCard key={article.id} article={article} />
+          ))}
         </div>
       </Container>
-    </section>
+    </div>
   );
 };
 
