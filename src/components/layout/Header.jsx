@@ -5,19 +5,30 @@ import Container from './Container.jsx';
 import Button from '../common/Button.jsx';
 
 const mainNavLinks = [
-  { label: 'Le Groupe', to: '/le-groupe' },
   { label: 'Nos Atouts', to: '/nos-atouts' },
-  { label: 'Actualités', to: '/actualites' },
   { label: 'Nos Engagements', to: '/nos-engagements' },
-  { label: 'Contact', to: '/contact' },
-  { label: 'Opportunités', to: '/opportunites' },
+  { label: 'Actualités', to: '/actualites' },
+  { label: 'Opportunités', to: '/opportunites', icon: 'briefcase' },
 ];
 
 const serviceLinks = [
-  { label: 'Saybus', to: '/saybus' },
-  { label: 'Réunir Assurance', to: '/reunir-assurance' },
-  { label: 'Réunir Services', to: '/reunir-services' },
   { label: 'Réunir Association', to: '/reunir-association' },
+  { label: 'Réunir Assurances', to: '/reunir-assurance' },
+  { label: 'Synéo', to: '/syneo' },
+  { label: 'Saybus', to: '/saybus' },
+];
+
+const connectLinks = [
+  { label: 'Espace Adhérent', href: 'https://reunir-extranet.web.app' },
+  { label: 'Réunir Avantages', href: 'https://avantages.reunir.org/' },
+  { label: 'Réunir Assurances', href: 'https://reunir.prod-extranet.iga.fr/' },
+  {
+    label: 'Réunir Santé',
+    children: [
+      { label: 'RH', href: 'https://easyaccess.verlingue.fr/View/Accueil.aspx?ReturnUrl=/default.aspx' },
+      { label: 'Salarié', href: 'https://www.generation.fr/adherents/' },
+    ],
+  },
 ];
 
 const utilityLinks = [
@@ -34,30 +45,108 @@ const utilityLinks = [
 const navLinkBase =
   'text-sm font-medium transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-reunir-accent';
 
+const BriefcaseIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7m4 0h-14a2 2 0 0 0-2 2v7.5A2.5 2.5 0 0 0 5.5 19h13a2.5 2.5 0 0 0 2.5-2.5V9a2 2 0 0 0-2-2Zm-7 4v2m-6-2h14"
+    />
+  </svg>
+);
+
 const Header = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isConnectOpen, setIsConnectOpen] = useState(false);
 
-  const toggleMobileMenu = () => setIsMobileOpen((prev) => !prev);
-  const toggleDropdown = () => setOpenDropdown((prev) => !prev);
+  const toggleMobileMenu = () => {
+    setIsMobileOpen((prev) => !prev);
+    setIsServicesOpen(false);
+    setIsConnectOpen(false);
+  };
+
+  const toggleServicesMenu = () =>
+    setIsServicesOpen((prev) => {
+      const next = !prev;
+      if (next) {
+        setIsConnectOpen(false);
+      }
+      return next;
+    });
+
+  const toggleConnectMenu = () =>
+    setIsConnectOpen((prev) => {
+      const next = !prev;
+      if (next) {
+        setIsServicesOpen(false);
+      }
+      return next;
+    });
 
   const closeMenus = () => {
     setIsMobileOpen(false);
-    setOpenDropdown(false);
+    setIsServicesOpen(false);
+    setIsConnectOpen(false);
   };
 
-  const renderNavLink = (link) => (
-    <NavLink
-      key={link.to}
-      to={link.to}
-      className={({ isActive }) =>
-        `${navLinkBase} ${isActive ? 'text-white' : 'text-white/70 hover:text-white'}`
+  const renderNavLink = (link) => {
+    const Icon = link.icon === 'briefcase' ? BriefcaseIcon : null;
+    return (
+      <NavLink
+        key={link.to}
+        to={link.to}
+        className={({ isActive }) =>
+          `${navLinkBase} ${isActive ? 'text-white' : 'text-white/70 hover:text-white'}`
+        }
+        onClick={closeMenus}
+      >
+        <span className="flex items-center gap-2">
+          {Icon && <Icon className="h-4 w-4" />}
+          {link.label}
+        </span>
+      </NavLink>
+    );
+  };
+
+  const renderConnectLinks = (linkClass, headingClass) =>
+    connectLinks.map((link) => {
+      if (link.children) {
+        return (
+          <div key={link.label} className="flex flex-col gap-2">
+            <p className={headingClass}>{link.label}</p>
+            <div className="flex flex-col gap-2 pl-3">
+              {link.children.map((child) => (
+                <a
+                  key={child.href}
+                  href={child.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={linkClass}
+                  onClick={closeMenus}
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        );
       }
-      onClick={closeMenus}
-    >
-      {link.label}
-    </NavLink>
-  );
+
+      return (
+        <a
+          key={link.href}
+          href={link.href}
+          target="_blank"
+          rel="noreferrer"
+          className={linkClass}
+          onClick={closeMenus}
+        >
+          {link.label}
+        </a>
+      );
+    });
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-white/20 bg-gradient-to-r from-white/10 via-white/5 to-white/10 backdrop-blur-3xl shadow-[0_20px_45px_rgba(0,0,0,0.25)]">
@@ -68,13 +157,6 @@ const Header = () => {
         </Link>
 
         <div className="flex items-center gap-4 lg:hidden">
-          <Link
-            to="/job-board"
-            className="text-xs font-semibold uppercase tracking-wide text-white/80"
-            onClick={closeMenus}
-          >
-            Job Board
-          </Link>
           <button
             type="button"
             className="flex h-10 w-10 items-center justify-center rounded-md border border-white/30 text-white"
@@ -100,12 +182,14 @@ const Header = () => {
             <button
               type="button"
               className={`${navLinkBase} flex items-center gap-1 text-white/80 hover:text-white`}
-              onClick={toggleDropdown}
+              onClick={toggleServicesMenu}
+              aria-expanded={isServicesOpen}
+              aria-haspopup="true"
             >
-              Nos Services
+              Réunir
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className={`h-4 w-4 transition-transform ${openDropdown ? 'rotate-180' : ''}`}
+                className={`h-4 w-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -113,7 +197,7 @@ const Header = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="m6 9 6 6 6-6" />
               </svg>
             </button>
-            {openDropdown && (
+            {isServicesOpen && (
               <div className="absolute left-0 mt-3 w-56 rounded-lg border border-white/10 bg-[#0c1328] p-4 shadow-lg">
                 <div className="flex flex-col gap-3 text-sm">
                   {serviceLinks.map((link) => renderNavLink(link))}
@@ -122,16 +206,30 @@ const Header = () => {
             )}
           </div>
           {mainNavLinks.map((link) => renderNavLink(link))}
-          <Link to="/job-board" className="text-xs font-semibold uppercase tracking-wide text-white/80 hover:text-white" onClick={closeMenus}>
-            Job Board
-          </Link>
-          <Button
-            href="https://espace-adherent.reunir.fr"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Espace Adhérent
-          </Button>
+          <div className="relative">
+            <Button type="button" onClick={toggleConnectMenu} aria-expanded={isConnectOpen} aria-haspopup="true">
+              Se connecter
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={`h-4 w-4 transition-transform ${isConnectOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="m6 9 6 6 6-6" />
+              </svg>
+            </Button>
+            {isConnectOpen && (
+              <div className="absolute right-0 mt-3 w-64 rounded-lg border border-white/10 bg-[#0c1328] p-4 shadow-lg">
+                <div className="flex flex-col gap-3 text-sm">
+                  {renderConnectLinks(
+                    'block text-left text-white/80 transition hover:text-white',
+                    'text-xs font-semibold uppercase tracking-wide text-white/60'
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </nav>
       </Container>
 
@@ -142,12 +240,13 @@ const Header = () => {
               <button
                 type="button"
                 className="flex w-full items-center justify-between rounded-md border border-white/20 px-4 py-2 text-left text-sm font-semibold text-white"
-                onClick={toggleDropdown}
+                onClick={toggleServicesMenu}
+                aria-expanded={isServicesOpen}
               >
-                <span>Nos Services</span>
+                <span>Réunir</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`h-4 w-4 transition-transform ${openDropdown ? 'rotate-180' : ''}`}
+                  className={`h-4 w-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -155,9 +254,36 @@ const Header = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="m6 9 6 6 6-6" />
                 </svg>
               </button>
-              {openDropdown && (
+              {isServicesOpen && (
                 <div className="mt-3 flex flex-col gap-3 rounded-lg border border-white/10 bg-white/10 p-4 text-white">
                   {serviceLinks.map((link) => renderNavLink(link))}
+                </div>
+              )}
+            </div>
+            <div>
+              <button
+                type="button"
+                className="flex w-full items-center justify-between rounded-md border border-white/20 px-4 py-2 text-left text-sm font-semibold text-white"
+                onClick={toggleConnectMenu}
+                aria-expanded={isConnectOpen}
+              >
+                <span>Se connecter</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`h-4 w-4 transition-transform ${isConnectOpen ? 'rotate-180' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+              {isConnectOpen && (
+                <div className="mt-3 flex flex-col gap-3 rounded-lg border border-white/10 bg-white/10 p-4 text-white">
+                  {renderConnectLinks(
+                    'block text-left text-white/90 transition hover:text-white',
+                    'text-xs font-semibold uppercase tracking-wide text-white/70'
+                  )}
                 </div>
               )}
             </div>
@@ -166,13 +292,6 @@ const Header = () => {
               <p className="text-xs font-semibold uppercase tracking-wide text-white">Explorer</p>
               {utilityLinks.map((link) => renderNavLink(link))}
             </div>
-            <Button
-              href="https://espace-adherent.reunir.fr"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Espace Adhérent
-            </Button>
           </Container>
         </div>
       )}
